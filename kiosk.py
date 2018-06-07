@@ -1,3 +1,5 @@
+import math
+
 class Kiosk():
     def __init__(self,desc="",addr="",lat=0.0,longt=0.0):
         self.description = desc
@@ -16,5 +18,16 @@ class DeliveryDriver():
         self.cost = 0
 
     def addStop(self,kiosk):
-        self.stops.append(kiosk)
+        
         kiosk.visit()
+        self.cost = self.cost + findDistance(kiosk,self.stops[-1])
+        self.stops.append(kiosk)
+
+
+def findDistance(next,prev):
+    lat_diff = abs(next.latitude - prev.latitude)
+    long_diff = abs(next.longitude - prev.longitude)
+
+    cost = math.sqrt((lat_diff ** 2)+(long_diff ** 2))
+
+    return cost
