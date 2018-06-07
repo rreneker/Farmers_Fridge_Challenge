@@ -8,3 +8,13 @@ class Kiosk():
     
     def visit(self):
         self.visited = True
+
+class DeliveryDriver():
+    def __init__(self,k = Kiosk()):
+        self.stops = []
+        self.stops.append(k)
+        self.cost = 0
+
+    def addStop(self,kiosk):
+        self.stops.append(kiosk)
+        kiosk.visit()

@@ -1,4 +1,4 @@
-from kiosk import Kiosk
+from kiosk import Kiosk, DeliveryDriver
 import csv
 
 kioskList = []
@@ -11,10 +11,8 @@ with open('KioskCoords.csv','rb') as csvfile:
     for row in reader:
         kioskList.append(Kiosk(row[0],row[1],row[2],row[3]))
 
-routeOne = []
-routeTwo = []
-routeOne.append(depot)
-routeTwo.append(depot)
+routeOne = DeliveryDriver(depot)
+routeTwo = DeliveryDriver(depot)
         
 
 for kiosk in kioskList:
