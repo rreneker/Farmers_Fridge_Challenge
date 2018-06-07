@@ -1,11 +1,14 @@
 from kiosk import Kiosk
 import csv
 
+kioskList = []
+
 with open('KioskCoords.csv','rb') as csvfile:
     reader = csv.reader(csvfile,delimiter=',',quotechar='"')
+    next(reader)
     for row in reader:
-        print ', '.join(row)
+        kioskList.append(Kiosk(row[0],row[1],row[2],row[3]))
+        
 
-kiosks = Kiosk("home","123 Fake Street")
-
-print kiosks.address
+for kiosk in kioskList:
+    print kiosk.description+"|"+kiosk.address+"|"+kiosk.latitude+"|"+kiosk.longitude+"|"+str(kiosk.visited)
