@@ -12,8 +12,7 @@ with open('KioskCoords.csv','rb') as csvfile:
         kioskList.append(Kiosk(row[0],row[1],row[2],row[3]))
 
 routeOne = DeliveryDriver(depot)
-routeTwo = DeliveryDriver(depot)
-        
+routeTwo = DeliveryDriver(depot)       
 
 for kiosk in kioskList:
     print kiosk.description+"|"+kiosk.address+"|"+kiosk.latitude+"|"+kiosk.longitude+"|"+str(kiosk.visited)
