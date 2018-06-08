@@ -36,5 +36,8 @@ class DeliveryDriver():
         print "Stops: "
         for stop in self.stops:
             print stop.description+" "+stop.address
+    
+    def FindPath(self,KioskList):
+        print "COMING SOON"
 
 
