@@ -31,4 +31,10 @@ class DeliveryDriver():
 
         return cost
 
+    def printPath(self):
+        print "Cost: "+str(self.cost)
+        print "Stops: "
+        for stop in self.stops:
+            print stop.description+" "+stop.address
+
 
