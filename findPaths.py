@@ -1,6 +1,7 @@
 from kiosk import Kiosk, DeliveryDriver
 import csv
 
+KioskList = []
 NorthKioskList = []
 SouthKioskList = []
 
@@ -10,17 +11,16 @@ with open('KioskCoords.csv','rb') as csvfile:
     reader = csv.reader(csvfile,delimiter=',',quotechar='"')
     next(reader)
     for row in reader:
-        if float(row[2]) >= depot.latitude:
-            NorthKioskList.append(Kiosk(row[0],row[1],float(row[2]),float(row[3])))
-        else:
-            SouthKioskList.append(Kiosk(row[0],row[1],float(row[2]),float(row[3])))
+        KioskList.append(Kiosk(row[0],row[1],float(row[2]),float(row[3])))
         
 
 routeOne = DeliveryDriver(depot)
 routeTwo = DeliveryDriver(depot)
 
-NorthKioskList.sort(key=lambda x: x.latitude, reverse=True)
-SouthKioskList.sort(key=lambda x: x.latitude, reverse=True)
+KioskList.sort(key=lambda x: x.latitude, reverse=True)
+
+NorthKioskList = KioskList[:len(KioskList)/2]
+SouthKioskList = KioskList[len(KioskList)/2:]
 
 print len(NorthKioskList)
 print len(SouthKioskList)
