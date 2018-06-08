@@ -20,14 +20,15 @@ class DeliveryDriver():
     def addStop(self,kiosk):
         
         kiosk.visit()
-        self.cost = self.cost + findDistance(kiosk,self.stops[-1])
+        self.cost = self.cost + self.findDistance(kiosk,self.stops[-1])
         self.stops.append(kiosk)
+    
+    def findDistance(self,next,prev):
+        lat_diff = abs(next.latitude - prev.latitude)
+        long_diff = abs(next.longitude - prev.longitude)
+
+        cost = math.sqrt((lat_diff ** 2)+(long_diff ** 2))
+
+        return cost
 
 
-def findDistance(next,prev):
-    lat_diff = abs(next.latitude - prev.latitude)
-    long_diff = abs(next.longitude - prev.longitude)
-
-    cost = math.sqrt((lat_diff ** 2)+(long_diff ** 2))
-
-    return cost
