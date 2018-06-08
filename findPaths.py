@@ -17,5 +17,3 @@ routeTwo = DeliveryDriver(depot)
 routeOne.addStop(kioskList[0])
 routeOne.printPath()
 
-for kiosk in kioskList:
-    print kiosk.description+"|"+kiosk.address+"|"+str(kiosk.latitude)+"|"+str(kiosk.longitude)+"|"+str(kiosk.visited)
