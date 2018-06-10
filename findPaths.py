@@ -1,6 +1,20 @@
-from kiosk import Kiosk, DeliveryDriver
-import csv
+from kiosk import Kiosk
+from random import shuffle
+import csv, math
 
+def findDistance(next,prev):
+        lat_diff = abs(next.latitude - prev.latitude)
+        long_diff = abs(next.longitude - prev.longitude)
+
+        cost = math.sqrt((lat_diff ** 2)+(long_diff ** 2))
+
+        return cost
+
+def findTotalDistance(KioskList):
+    cost = 0
+    for i in range(1,len(KioskList)):
+        cost = cost + findDistance(KioskList[i-1],KioskList[i])
+    return cost
 
 
 KioskList = []
@@ -15,8 +29,9 @@ with open('KioskCoords.csv','rb') as csvfile:
         KioskList.append(Kiosk(row[0],row[1],float(row[2]),float(row[3])))
         
 KioskList.append(depot)
+shuffle(KioskList)
 
-
+print findTotalDistance(KioskList)
 
 
 
