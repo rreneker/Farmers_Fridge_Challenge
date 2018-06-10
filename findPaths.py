@@ -42,7 +42,7 @@ def TwoOpt(KioskList):
                 tempList[i], tempList[j] = tempList[j], tempList[i]
                 tempCost = findMaxSplitDistance(tempList,tempList[0])
                 if tempCost < bestCost:
-                    print str(i)+" "+str(bestCost)+"|"+str(tempCost)
+                    #print str(i)+" "+str(bestCost)+"|"+str(tempCost)
                     bestPath = list(tempList)
                     bestCost = tempCost
                     improved = True
@@ -78,10 +78,7 @@ for i in range(1,len(solution)-1):
         routeOne = solution[:i+1]
         routeTwo = solution[i:]
         break
-for kiosk in solution:
-    kiosk.kioskPrint()
-print "Total Cost: "+str(findTotalDistance(solution))
-print "-------------"
+
 for kiosk in routeOne:
     kiosk.kioskPrint()
 print "Route One Cost: "+str(findTotalDistance(routeOne))
