@@ -1,3 +1,8 @@
 to run, use command 'python findPaths.py
 
 uses python 2.7
+
+ASSUMPTIONS:
+
+Kiosks exist in a cartesian plane (i.e. curvature of earth is ignored)
+cost between two kiosks is as the crow flies
