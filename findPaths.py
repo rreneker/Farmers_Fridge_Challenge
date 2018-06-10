@@ -16,6 +16,12 @@ def findTotalDistance(KioskList):
         cost = cost + findDistance(KioskList[i-1],KioskList[i])
     return cost
 
+def TwoOpt(KioskList):
+    bestPath = []
+    bestPath = KioskList
+    bestCost = findTotalDistance(bestPath)
+    print "Still in Progress"
+
 
 KioskList = []
 
@@ -31,7 +37,10 @@ with open('KioskCoords.csv','rb') as csvfile:
 KioskList.append(depot)
 shuffle(KioskList)
 
-print findTotalDistance(KioskList)
+KioskList.insert(0,depot)
+KioskList.append(depot)
+
+TwoOpt(KioskList)
 
 
 
