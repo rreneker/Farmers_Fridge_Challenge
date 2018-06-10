@@ -16,15 +16,38 @@ def findTotalDistance(KioskList):
         cost = cost + findDistance(KioskList[i-1],KioskList[i])
     return cost
 
+def findMaxSplitDistance(KioskList, depot):
+    routeOne = []
+    routeTwo = []
+    for i in range(1,len(KioskList)-1):
+        if KioskList[i] == depot:
+            routeOne = KioskList[:i+1]
+            routeTwo = KioskList[i:]
+            break
+    routeOneCost = findTotalDistance(routeOne)
+    routeTwoCost = findTotalDistance(routeTwo)
+    return max(routeOneCost,routeTwoCost)
+
 def TwoOpt(KioskList):
     bestPath = []
-    bestPath = KioskList
-    bestCost = findTotalDistance(bestPath)
+    bestPath = list(KioskList)
+    bestCost = findMaxSplitDistance(bestPath,bestPath[0])
 
     improved = True
     while improved == True:
         improved = False
-    print "Still in Progress"
+        for i in range(1,len(bestPath)-1):
+            for j in range(i+1,len(bestPath)-1):
+                tempList = list(bestPath)
+                tempList[i], tempList[j] = tempList[j], tempList[i]
+                tempCost = findMaxSplitDistance(tempList,tempList[0])
+                if tempCost < bestCost:
+                    print str(i)+" "+str(bestCost)+"|"+str(tempCost)
+                    bestPath = list(tempList)
+                    bestCost = tempCost
+                    improved = True
+    for kiosk in bestPath:
+        kiosk.kioskPrint()              
     return bestPath
 
 
@@ -54,11 +77,15 @@ for i in range(1,len(solution)-1):
     if solution[i] == depot:
         routeOne = solution[:i+1]
         routeTwo = solution[i:]
-
-
-
+        break
+for kiosk in solution:
+    kiosk.kioskPrint()
+print "Total Cost: "+str(findTotalDistance(solution))
+print "-------------"
 for kiosk in routeOne:
     kiosk.kioskPrint()
+print "Route One Cost: "+str(findTotalDistance(routeOne))
 print "-------------"
 for kiosk in routeTwo:
     kiosk.kioskPrint()
+print "Route Two Cost: "+str(findTotalDistance(routeTwo))
