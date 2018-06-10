@@ -46,8 +46,7 @@ def TwoOpt(KioskList):
                     bestPath = list(tempList)
                     bestCost = tempCost
                     improved = True
-    for kiosk in bestPath:
-        kiosk.kioskPrint()              
+                  
     return bestPath
 
 
