@@ -20,7 +20,12 @@ def TwoOpt(KioskList):
     bestPath = []
     bestPath = KioskList
     bestCost = findTotalDistance(bestPath)
+
+    improved = True
+    while improved == True:
+        improved = False
     print "Still in Progress"
+    return bestPath
 
 
 KioskList = []
@@ -40,11 +45,20 @@ shuffle(KioskList)
 KioskList.insert(0,depot)
 KioskList.append(depot)
 
-TwoOpt(KioskList)
+solution = TwoOpt(KioskList)
+
+routeOne = []
+routeTwo = []
+
+for i in range(1,len(solution)-1):
+    if solution[i] == depot:
+        routeOne = solution[:i+1]
+        routeTwo = solution[i:]
 
 
 
-
-
-
-
+for kiosk in routeOne:
+    kiosk.kioskPrint()
+print "-------------"
+for kiosk in routeTwo:
+    kiosk.kioskPrint()
