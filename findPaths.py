@@ -16,18 +16,6 @@ def findTotalDistance(KioskList):
         cost = cost + findDistance(KioskList[i-1],KioskList[i])
     return cost
 
-def findMaxSplitDistance(KioskList, depot):
-    routeOne = []
-    routeTwo = []
-    for i in range(1,len(KioskList)-1):
-        if KioskList[i] == depot:
-            routeOne = KioskList[:i+1]
-            routeTwo = KioskList[i:]
-            break
-    routeOneCost = findTotalDistance(routeOne)
-    routeTwoCost = findTotalDistance(routeTwo)
-    return max(routeOneCost,routeTwoCost)
-
 def TwoOptHelper(KioskList):
     bestPath = []
     bestPath = list(KioskList)
