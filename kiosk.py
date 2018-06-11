@@ -6,10 +6,7 @@ class Kiosk():
         self.address = addr
         self.latitude = lat
         self.longitude = longt
-        self.visited = False
     
-    def visit(self):
-        self.visited = True
     def kioskPrint(self):
         print self.description+" "+self.address
 
