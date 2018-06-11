@@ -31,7 +31,7 @@ def findMaxSplitDistance(KioskList, depot):
 def TwoOpt(KioskList):
     bestPath = []
     bestPath = list(KioskList)
-    bestCost = findMaxSplitDistance(bestPath,bestPath[0])
+    bestCost = findTotalDistance(bestPath)
 
     improved = True
     while improved == True:
@@ -40,7 +40,7 @@ def TwoOpt(KioskList):
             for j in range(i+1,len(bestPath)-1):
                 tempList = list(bestPath)
                 tempList[i], tempList[j] = tempList[j], tempList[i]
-                tempCost = findMaxSplitDistance(tempList,tempList[0])
+                tempCost = findTotalDistance(tempList)
                 if tempCost < bestCost:
                     #print str(i)+" "+str(bestCost)+"|"+str(tempCost)
                     bestPath = list(tempList)
