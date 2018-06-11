@@ -28,7 +28,7 @@ def findMaxSplitDistance(KioskList, depot):
     routeTwoCost = findTotalDistance(routeTwo)
     return max(routeOneCost,routeTwoCost)
 
-def TwoOpt(KioskList):
+def TwoOptHelper(KioskList):
     bestPath = []
     bestPath = list(KioskList)
     bestCost = findTotalDistance(bestPath)
@@ -47,7 +47,21 @@ def TwoOpt(KioskList):
                     bestCost = tempCost
                     improved = True
                   
+    return bestPath,bestCost
+
+def TwoOpt(KioskList,depot):
+    bestPath = []
+    bestCost = float('inf')
+        shuffle(KioskList)
+        currentPath = list(KioskList)
+        currentPath.insert(0,depot)
+        currentPath.append(depot)
+        result,cost = TwoOptHelper(currentPath)
+        if cost < bestCost:
+            bestPath = list(result)
+            bestCost = cost
     return bestPath
+
 
 
 KioskList = []
@@ -62,12 +76,8 @@ with open('KioskCoords.csv','rb') as csvfile:
         KioskList.append(Kiosk(row[0],row[1],float(row[2]),float(row[3])))
         
 KioskList.append(depot)
-shuffle(KioskList)
 
-KioskList.insert(0,depot)
-KioskList.append(depot)
-
-solution = TwoOpt(KioskList)
+solution = TwoOpt(KioskList,depot)
 
 routeOne = []
 routeTwo = []
@@ -78,10 +88,12 @@ for i in range(1,len(solution)-1):
         routeTwo = solution[i:]
         break
 
+print "ROUTE ONE:"
 for kiosk in routeOne:
     kiosk.kioskPrint()
 print "Route One Cost: "+str(findTotalDistance(routeOne))
 print "-------------"
+print "ROUTE TWO:"
 for kiosk in routeTwo:
     kiosk.kioskPrint()
 print "Route Two Cost: "+str(findTotalDistance(routeTwo))
