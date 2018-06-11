@@ -52,6 +52,7 @@ def TwoOptHelper(KioskList):
 def TwoOpt(KioskList,depot):
     bestPath = []
     bestCost = float('inf')
+    for i in range(25):
         shuffle(KioskList)
         currentPath = list(KioskList)
         currentPath.insert(0,depot)
